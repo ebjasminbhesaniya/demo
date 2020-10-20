@@ -163,6 +163,34 @@
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur,
       corrupti.
     </p>
+    <label for="id">id</label><br />
+    <input type="text" id="id" name="fname" value="" v-model="id" /><br />
+    <label for="fname">First name:</label><br />
+    <input type="text" id="fname" name="fname" value="" v-model="fname" /><br />
+    <label for="lname">Last name:</label><br />
+    <input type="text" id="lname" name="lname" value="" v-model="lname" /><br />
+    <label for="age">age:</label><br />
+    <input type="text" id="age" name="age" value="" v-model="age" /><br />
+    <label for="mobileno">Mobile No.</label><br />
+    <input type="number" id="mobileno" v-model="mno" /><br />
+
+    <button @click="save">add table</button>
+    <table border="2px solid black" width="500px">
+      <tr>
+        <th>id</th>
+        <th>first name</th>
+        <th>last name</th>
+        <th>age</th>
+        <th>mobile No.</th>
+      </tr>
+      <tr v-for="students in student" :key="students.id">
+        <td>{{ students.id }}</td>
+        <td>{{ students.fname }}</td>
+        <td>{{ students.lname }}</td>
+        <td>{{ students.age }}</td>
+        <td>{{ students.mno }}</td>
+      </tr>
+    </table>
     <div>
       <slot name="header"></slot>
       <h1>hello</h1>
@@ -211,6 +239,12 @@ export default {
       stud: ["aa", "bb", "cc"],
 
       rowdata: [],
+      student: [],
+      id: "",
+      fname: "",
+      lname: "",
+      age: "",
+      mno: "",
       employee: [
         { id: 1, name: "abc" },
         { id: 2, name: "xyz" },
@@ -267,6 +301,15 @@ export default {
     signalChange(event) {
       this.text = event.target.value;
       console.log(event.target.value);
+    },
+    save() {
+      this.student.push({
+        id: this.id,
+        fname: this.fname,
+        lname: this.lname,
+        age: this.age,
+        mno: this.mno,
+      });
     },
   },
 };
