@@ -175,6 +175,8 @@
     <input type="number" id="mobileno" v-model="mno" /><br />
 
     <button @click="save">add table</button>
+    <button @click="remove">delete</button>
+
     <table border="2px solid black" width="500px">
       <tr>
         <th>id</th>
@@ -189,13 +191,54 @@
         <td>{{ students.lname }}</td>
         <td>{{ students.age }}</td>
         <td>{{ students.mno }}</td>
+        <td><button @click="set">update</button></td>
       </tr>
     </table>
-    <div>
-      <slot name="header"></slot>
-      <h1>hello</h1>
-      <slot name="content"></slot>
+
+    <div
+      class="card"
+      @click="bluecolor1"
+      :style="{ backgroundColor: cardcolor1 }"
+    >
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, tempora?
     </div>
+    <div
+      class="card"
+      @click="bluecolor2"
+      :style="{ backgroundColor: cardcolor2 }"
+    >
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, tempora?
+    </div>
+    <div
+      class="card"
+      @click="bluecolor3"
+      :style="{ backgroundColor: cardcolor3 }"
+    >
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, tempora?
+    </div>
+
+    <button @click="btn1" :disabled="someCondition1">one</button>
+    <button @click="btn2" :disabled="someCondition2">two</button>
+    <button @click="btn3" :disabled="someCondition2">three</button>
+    <br />
+    <button @click="edittext1" v-text="changetext1"></button>
+    <button @click="edittext2" v-text="changetext2"></button>
+    <button @click="edittext3" v-text="changetext3"></button>
+
+    <table border="2px solid black" width="200px">
+      <tr>
+        <th>name</th>
+      </tr>
+      <tr v-for="animals in animal" :key="animals.name">
+        <td v-on-hover-bold :style="{ fontWeight: bold }">
+          {{ animals.name }}
+        </td>
+      </tr>
+    </table>
+    <!-- <slot name="header"></slot> -->
+    <div slot="header"></div>
+    <h1 v-color>hello</h1>
+    <slot name="content"></slot>
   </div>
 </template>
 <script>
@@ -203,6 +246,16 @@ export default {
   name: "demo1",
   data() {
     return {
+      bold: "",
+      cardcolor1: "",
+      cardcolor2: "",
+      cardcolor3: "",
+      someCondition1: false,
+      someCondition2: false,
+      someCondition3: false,
+      changetext1: "button1",
+      changetext2: "button2",
+      changetext3: "button3",
       htmlTag: "",
       imgpath: "",
       m: 0,
@@ -252,6 +305,14 @@ export default {
         { id: 4, name: "ldddd" },
         { id: 5, name: "mslldod" },
         { id: 6, name: "jkfks" },
+      ],
+      animal: [
+        { name: "zibra" },
+        { name: "dog" },
+        { name: "bird" },
+        { name: "cat" },
+        { name: "cow" },
+        { name: "horse" },
       ],
     };
   },
@@ -310,6 +371,61 @@ export default {
         age: this.age,
         mno: this.mno,
       });
+      (this.id = ""),
+        (this.fname = ""),
+        (this.lname = ""),
+        (this.age = ""),
+        (this.mno = "");
+    },
+    remove() {
+      this.student.pop();
+    },
+    set() {
+      this.student = new Set({
+        id: this.id,
+        fname: this.fname,
+        lname: this.lname,
+        age: this.age,
+        mno: this.mno,
+      });
+    },
+    bluecolor1() {
+      this.cardcolor1 = "blue";
+      this.cardcolor2 = "red";
+      this.cardcolor3 = "red";
+    },
+    bluecolor2() {
+      this.cardcolor2 = "blue";
+      this.cardcolor1 = "red";
+      this.cardcolor3 = "red";
+    },
+    bluecolor3() {
+      this.cardcolor3 = "blue";
+      this.cardcolor2 = "red";
+      this.cardcolor1 = "red";
+    },
+    btn1() {
+      (this.someCondition2 = true), (this.someCondition3 = true);
+    },
+    btn2() {
+      (this.someCondition1 = true), (this.someCondition3 = true);
+    },
+    btn3() {
+      (this.someCondition3 = false),
+        (this.someCondition1 = true),
+        (this.someCondition2 = true);
+    },
+    edittext1() {
+      this.changetext1 = "clicked";
+    },
+    edittext2() {
+      this.changetext2 = "clicked";
+    },
+    edittext3() {
+      this.changetext3 = "clicked";
+    },
+    hover() {
+      this.bold = "bold";
     },
   },
 };
@@ -327,5 +443,10 @@ label {
   width: 150px;
   height: 150px;
   border: 2px solid red;
+}
+.card {
+  width: 150px;
+  height: 150px;
+  border: 2px solid black;
 }
 </style>

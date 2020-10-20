@@ -1,27 +1,22 @@
 <template>
   <div id="app">
-    
-      <div>
-      <slot name='header'> This will be injected as the header slot.</slot>
-      <slot name='content'> This will be the content of the element</slot>
-      </div>
-    
+    <h1 slot="header">This will be injected as the header slot.</h1>
+    <slot name="content"> This will be the content of the element</slot>
+
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <demo1/>
+    <demo1 />
   </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-import demo1 from './components/demo1.vue'
+import demo1 from "./components/demo1.vue";
 export default {
   name: "App",
   components: {
     // HelloWorld,
     demo1,
-    // 'form-helper':form-helper,
-    
   },
 };
 </script>
