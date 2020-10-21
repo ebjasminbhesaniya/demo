@@ -219,7 +219,7 @@
 
     <button @click="btn1" :disabled="someCondition1">one</button>
     <button @click="btn2" :disabled="someCondition2">two</button>
-    <button @click="btn3" :disabled="someCondition2">three</button>
+    <button @click="btn3" :disabled="someCondition3">three</button>
     <br />
     <button @click="edittext1" v-text="changetext1"></button>
     <button @click="edittext2" v-text="changetext2"></button>
@@ -227,10 +227,12 @@
 
     <table border="2px solid black" width="200px">
       <tr>
+        <th>id</th>
         <th>name</th>
       </tr>
       <tr v-for="animals in animal" :key="animals.name">
-        <td v-on-hover-bold :style="{ fontWeight: bold }">
+        <td>{{ animals.id }}</td>
+        <td @mouseover="hover(animals)" :class="{ row: isrow }">
           {{ animals.name }}
         </td>
       </tr>
@@ -246,6 +248,8 @@ export default {
   name: "demo1",
   data() {
     return {
+      isrow: false,
+      selectedanimal: "",
       bold: "",
       cardcolor1: "",
       cardcolor2: "",
@@ -307,12 +311,12 @@ export default {
         { id: 6, name: "jkfks" },
       ],
       animal: [
-        { name: "zibra" },
-        { name: "dog" },
-        { name: "bird" },
-        { name: "cat" },
-        { name: "cow" },
-        { name: "horse" },
+        { id: 1, name: "zibra" },
+        { id: 2, name: "dog" },
+        { id: 3, name: "bird" },
+        { id: 4, name: "cat" },
+        { id: 5, name: "cow" },
+        { id: 6, name: "horse" },
       ],
     };
   },
@@ -405,10 +409,14 @@ export default {
       this.cardcolor1 = "red";
     },
     btn1() {
-      (this.someCondition2 = true), (this.someCondition3 = true);
+      (this.someCondition1 = false),
+        (this.someCondition2 = true),
+        (this.someCondition3 = true);
     },
     btn2() {
-      (this.someCondition1 = true), (this.someCondition3 = true);
+      this.someCondition2 = false;
+      this.someCondition1 = true;
+      this.someCondition3 = true;
     },
     btn3() {
       (this.someCondition3 = false),
@@ -425,7 +433,8 @@ export default {
       this.changetext3 = "clicked";
     },
     hover() {
-      this.bold = "bold";
+      // this.selectedanimal = item.id;
+      this.isrow = true;
     },
   },
 };
@@ -448,5 +457,8 @@ label {
   width: 150px;
   height: 150px;
   border: 2px solid black;
+}
+.row:hover {
+  font-weight: bold;
 }
 </style>
