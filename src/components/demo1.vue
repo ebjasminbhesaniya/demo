@@ -237,6 +237,7 @@
         </td>
       </tr>
     </table>
+
     <!-- <slot name="header"></slot> -->
     <div slot="header"></div>
     <h1 v-color>hello</h1>
