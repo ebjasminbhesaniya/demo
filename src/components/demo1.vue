@@ -384,6 +384,7 @@ export default {
     },
     remove() {
       this.student.pop();
+      
     },
     set() {
       this.student = new Set({

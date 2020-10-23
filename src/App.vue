@@ -5,18 +5,21 @@
 
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <demo1 />
+    <!-- <demo1 /> -->
+    <demo2 />
   </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-import demo1 from "./components/demo1.vue";
+// import demo1 from "./components/demo1.vue";
+import demo2 from "./components/demo2.vue";
 export default {
   name: "App",
   components: {
     // HelloWorld,
-    demo1,
+    // demo1,
+    demo2,
   },
 };
 </script>
