@@ -51,7 +51,7 @@
         <th>edit/delete</th>
       </tr>
 
-      <tr v-for="stud in students" :key="stud.name">
+      <tr v-for="stud in students" :key="stud.id">
         <td>{{ stud.id }}</td>
         <td>{{ stud.name }}</td>
         <td>{{ stud.skill }}</td>
@@ -73,15 +73,18 @@
     <br />
     <h1>todo list :</h1>
     <br />
+
     <input type="text" v-model="addtext" />
     <button @click="save">save</button>
+
     <ul>
       <li v-for="todo in todos" :key="todo.name">
-        {{ todo.name }}
+        {{ todo | capitalize }}
         <button @click="editTodo">Edit</button>
-        <button>delete</button>
+        <button @click="removeTodo">delete</button>
       </li>
     </ul>
+    <h1>{{ name | capitalize }}</h1>
   </div>
 </template>
 <script>
@@ -89,6 +92,7 @@ export default {
   name: "demo2",
   data() {
     return {
+      name: "jasmin",
       chknames: [],
       radioname: "",
       idtext: "",
@@ -100,6 +104,11 @@ export default {
       students: [],
       todos: [],
     };
+  },
+  filters: {
+    capitalize: function(value) {
+      return value.toUpperCase();
+    },
   },
   methods: {
     add() {
@@ -118,10 +127,11 @@ export default {
       this.mobiletext = "";
     },
     save() {
-      this.todos.push({
-        name: this.addtext,
-      });
+      this.todos.push(this.addtext);
       this.addtext = "";
+    },
+    removeTodo(index) {
+      this.todos.splice(index, 1);
     },
   },
 };

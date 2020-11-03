@@ -7,7 +7,9 @@ Vue.directive("color",{
   }
 })
 Vue.config.productionTip = false
-
+// Vue.filter('capitalize', function (value) {
+//   return value.toUpperCase() 
+// })
 new Vue({
   render: h => h(App),
 }).$mount('#app')
