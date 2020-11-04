@@ -59,6 +59,25 @@
         </td>
       </tr>
     </table>
+
+    <h1>{{ message }}</h1>
+    <h1>{{ reversedMessage }}</h1>
+
+    <div>
+      <button
+        @click="
+          a++;
+          addtoa;
+        "
+      >
+        Add to A
+      </button>
+      <button @click="b++">Add to B</button>
+      <p>A- {{ a }}</p>
+      <p>B- {{ b }}</p>
+      <p>Age + A = {{ addtoa }}</p>
+      <p>Age + B = {{ addtob }}</p>
+    </div>
   </div>
 </template>
 
@@ -78,9 +97,37 @@ export default {
       users: [],
       selectindex: "",
       editing: false,
+      message: "hello",
+      age: 20,
+      a: 0,
+      b: 0,
     };
   },
+  computed: {
+    reversedMessage: function() {
+      // `this` points to the vm instance
+      return this.message
+        .split("")
+        .reverse()
+        .join("");
+    },
+    addtoa() {
+      console.log("A");
+      return this.a + this.age;
+    },
+    addtob() {
+      console.log("B");
+      return this.b + this.age;
+    },
+  },
+
   methods: {
+    // reversedMessage() {
+    //   return this.message
+    //     .split("")
+    //     .reverse()
+    //     .join("");
+    // },
     addtodo() {
       this.todos.push(this.currentTodo);
       this.currentTodo = "";
