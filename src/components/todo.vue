@@ -78,15 +78,41 @@
       <p>Age + A = {{ addtoa }}</p>
       <p>Age + B = {{ addtob }}</p>
     </div>
+
+    <table border="2px solid black" width="500px">
+      <tr>
+        <th>id</th>
+        <th>employee name</th>
+
+        <th>on leave</th>
+        <th></th>
+      </tr>
+      <tr v-for="emp in employee" :key="emp.name">
+        <td>{{ emp.id }}</td>
+        <td>{{ emp.name }}</td>
+        <td><span v-show="(star = false)">*</span></td>
+        <td><button @click="starprint(emp)">on leave</button></td>
+      </tr>
+    </table>
+
+    <h1>{{ filter | filterB | capitalize }}</h1>
+    <a :href="href">goto</a>
+    <div :id="rowid | capitalize"></div>
+
+    <ul>
+      <li v-for="item in props" :key="item.name">{{ item.name }}</li>
+    </ul>
   </div>
 </template>
 
 <script>
 export default {
   name: "todo",
-  props: ["name"],
+  props: ["props"],
   data() {
     return {
+      rowid: "rowid",
+      href: "www.google.com",
       string: "jasmin",
       selectedindex: null,
       isediting: false,
@@ -101,6 +127,14 @@ export default {
       age: 20,
       a: 0,
       b: 0,
+      employee: [
+        { id: 1, name: "jay", star: false },
+        { id: 2, name: "jb", star: false },
+        { id: 3, name: "jasmin", star: false },
+      ],
+      // star: false,
+      selectitem: "",
+      filter: "string",
     };
   },
   computed: {
@@ -166,6 +200,12 @@ export default {
     deleted(index) {
       this.selectindex = index;
       this.users.splice(this.selectindex, 1);
+    },
+    starprint(emp) {
+      console.log(emp.id);
+      this.employee.star = true;
+      this.star = true;
+      console.log(emp.star);
     },
   },
   created() {

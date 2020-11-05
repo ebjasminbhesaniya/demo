@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <student-form>
+    <!-- <student-form>
       {{ message }}
       <h1 slot="header">This will be injected as the header slot.</h1>
       <h5>footer</h5>
-    </student-form>
+    </student-form> -->
     <!-- <slot name="content"> This will be the content of the element</slot>  -->
 
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <!-- <demo1 /> -->
     <!-- <demo2 /> -->
-    <todo :name="user" />
+    <todo :props="props" />
   </div>
 </template>
 
@@ -26,13 +26,14 @@ export default {
     // HelloWorld,
     // demo1,
     // demo2,
-    // todo,
-    "student-form": todo,
+    todo,
+    // "student-form": todo,
   },
   data() {
     return {
       message: "welcome",
-      user: [{ name: "jb" }, { name: "jay" }, { name: "jasmin" }],
+      props: [{ name: "jb" }, { name: "jay" }, { name: "jasmin" }],
+      title: ["a", "b", "c"],
     };
   },
 };
